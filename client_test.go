@@ -17,9 +17,9 @@ func openConnection(uri, username, apiKey string) (*Client, error) {
 
 func TestCreate(t *testing.T) {
 	//want := 201
-	username := "your_username"
-	apiKey := "xxxxxx"
-	uri := "http://localhost"
+	username := "hamid"
+	apiKey := "2f0e3398000a0a862fcc74eeb2aa2e97922bf32d2a497854f0eb15f98c036e56"
+	uri := "https://community.sparks.id"
 
 	client, err := openConnection(uri, username, apiKey)
 	if err != nil {
@@ -27,9 +27,9 @@ func TestCreate(t *testing.T) {
 	}
 
 	user := User{
-		Name:     "New User",
-		Email:    "newuser@example.com",
-		Username: "new-user",
+		Name:     "Hamid Sudargo",
+		Email:    "hamid@asadad.com",
+		Username: "hamid",
 		Password: "123456",
 		Active:   true,
 		Approved: true,
