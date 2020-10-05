@@ -20,7 +20,7 @@ func (c *Client) CreateUser(user User) (res interface{}, err error) {
 		return nil, err
 	}
 
-	req, err := newRequestWithBody(c, "PUT", "users", body)
+	req, err := newRequestWithBody(c, "POST", "users", body)
 	if err != nil {
 		return nil, err
 	}

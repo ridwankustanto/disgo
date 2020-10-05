@@ -1,7 +1,6 @@
 package disgo
 
 import (
-	"encoding/json"
 	"log"
 	"testing"
 )
@@ -19,7 +18,7 @@ func openConnection(uri, username, apiKey string) (*Client, error) {
 func TestCreate(t *testing.T) {
 	//want := 201
 	username := "your_username"
-	apiKey := "xxxxxxxx"
+	apiKey := "xxxxxx"
 	uri := "http://localhost"
 
 	client, err := openConnection(uri, username, apiKey)
@@ -28,28 +27,19 @@ func TestCreate(t *testing.T) {
 	}
 
 	user := User{
-		Name:     "New Member",
-		Email:    "newmember@example.com",
-		Username: "new-member",
-		Password: "member1234567",
+		Name:     "New User",
+		Email:    "newuser@example.com",
+		Username: "new-user",
+		Password: "123456",
 		Active:   true,
 		Approved: true,
 	}
 
-	body, err := json.Marshal(user)
-	if err != nil {
-		t.Errorf("Error while json marchal data user. got %q", err)
-	}
-
-	req, err := newRequestWithBody(client, "POST", "users", body)
-	if err != nil {
-		t.Errorf("Error while newRequestWithBody(). got %q", err)
-	}
-
-	res, err := executeRequest(client, req)
+	res, err := client.CreateUser(user)
 	if err != nil {
 		t.Errorf("Error while executeRequest(). got %q", err)
 	}
 
+	log.Println(res)
 	log.Println(res.(map[string]interface{})["message"])
 }
