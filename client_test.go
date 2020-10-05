@@ -2,7 +2,6 @@ package disgo
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"log"
 	"testing"
 )
@@ -20,7 +19,7 @@ func openConnection(uri, username, apiKey string) (*Client, error) {
 func TestCreate(t *testing.T) {
 	//want := 201
 	username := "your_username"
-	apiKey := "xxxxx"
+	apiKey := "xxxxxxxx"
 	uri := "http://localhost"
 
 	client, err := openConnection(uri, username, apiKey)
@@ -52,9 +51,5 @@ func TestCreate(t *testing.T) {
 		t.Errorf("Error while executeRequest(). got %q", err)
 	}
 
-	bodyResp, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Println(string(bodyResp))
+	log.Println(res.(map[string]interface{})["message"])
 }

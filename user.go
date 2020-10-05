@@ -2,7 +2,6 @@ package disgo
 
 import (
 	"encoding/json"
-	"net/http"
 )
 
 type User struct {
@@ -15,7 +14,7 @@ type User struct {
 }
 
 // CreateUser create new user.
-func (c *Client) CreateUser(user User) (res *http.Response, err error) {
+func (c *Client) CreateUser(user User) (res interface{}, err error) {
 	body, err := json.Marshal(user)
 	if err != nil {
 		return nil, err

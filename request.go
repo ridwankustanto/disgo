@@ -23,17 +23,22 @@ func newRequestWithBody(client *Client, method string, path string, body []byte)
 	return req, err
 }
 
-func executeRequest(client *Client, req *http.Request) (resp *http.Response, err error) {
+func executeRequest(client *Client, req *http.Request) (interface{}, error) {
 	httpc := &http.Client{
 		Timeout: client.timeout,
 	}
 	if client.transport != nil {
 		httpc.Transport = client.transport
 	}
-	resp, err = httpc.Do(req)
+	resp, err := httpc.Do(req)
 	if err != nil {
 		return nil, err
 	}
 
-	return resp, err
+	parsedResp, err := parseBodyResponse(resp)
+	if err != nil {
+		return nil, err
+	}
+
+	return parsedResp, err
 }
